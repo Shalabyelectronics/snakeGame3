@@ -8,15 +8,18 @@ class Scoreboard(Turtle):
         self.hideturtle()
         self.penup()
         self.goto(0, 270)
+        self.highest_score = 0
         self.score = 0
         self.score_refresh()
 
     def score_refresh(self):
-        self.write(arg=f"Score : {self.score}", move=False, align="center", font=("Calibre", 18, "bold"))
+        self.write(arg=f"Score : {self.score} | Highest score : {self.highest_score}", move=False, align="center", font=("Calibre", 18, "bold"))
 
     def update_score(self):
         self.increase_score()
-        self.score_refresh()
+        if self.highest_score < self.score:
+            self.highest_score = self.score
+            self.score_refresh()
 
     def increase_score(self):
         self.clear()
