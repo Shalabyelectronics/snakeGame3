@@ -45,7 +45,8 @@ while game_on:
         test.snake_increase()
         food.food_generator()
         score_board.update_score()
-
+    # TODO Remove the game_on and add reset current score and add it to High score
+    # TODO Rest the snake segments to start from the home position
     if wall_collision(test.snake_head):
         score_board.wall_hit()
         game_on = False
