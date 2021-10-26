@@ -49,6 +49,7 @@ while game_on:
     # TODO Rest the snake segments to start from the home position
     if wall_collision(test.snake_head):
         score_board.reset_score()
+        test.rest_snake()
     if snake_tail_collision(test.snake_head):
         score_board.reset_score()
 
