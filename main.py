@@ -48,10 +48,9 @@ while game_on:
     # TODO Remove the game_on and add reset current score and add it to High score
     # TODO Rest the snake segments to start from the home position
     if wall_collision(test.snake_head):
-        score_board.wall_hit()
-        game_on = False
+        score_board.reset_score()
     if snake_tail_collision(test.snake_head):
-        score_board.wall_hit()
-        game_on = False
+        score_board.reset_score()
+
 
 screen.exitonclick()
