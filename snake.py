@@ -55,10 +55,18 @@ class Snake:
             self.snake_head.setheading(LEFT)
 
     def rest_snake(self):
-        for seg in self.snake_segments[3:]:
-            seg.hideturtle()
-        self.snake_segments = self.snake_segments[0:3]
-        self.snake_head.goto(0, 0)
+        #This soluation is much better than mine because the snake segments dissappera and
+        #the snake initialize much faster on the screen
+        for seg in self.snake_segments:
+            seg.goto(1000, 1000)
+        self.snake_segments.clear()
+        self.create_snake()
+        self.snake_head = self.snake_segments[0]
+        #This my soluation
+        # for seg in self.snake_segments[3:]:
+        #     seg.hideturtle()
+        # self.snake_segments = self.snake_segments[0:3]
+        # self.snake_head.goto(0, 0)
 
 
 
