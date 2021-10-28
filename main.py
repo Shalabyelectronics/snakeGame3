@@ -4,6 +4,10 @@ from turtle import Screen
 from food import Food
 from scoreboard import Scoreboard
 import time
+import os.path
+
+
+
 
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -16,7 +20,15 @@ snake = Snake()
 screen.update()
 food = Food()
 score_board = Scoreboard()
-score_board.score_refresh()
+
+if os.path.isfile("highest_score.txt"):
+    with open("highest_score.txt") as track_score:
+        content = int(track_score.read())
+        score_board.highest_score = content
+else:
+    with open("highest_score.txt", mode="w") as track_score:
+        content = track_score.write(str(score_board.highest_score))
+
 screen.onkey(key="w", fun=snake.turn_up)
 screen.onkey(key="s", fun=snake.turn_down)
 screen.onkey(key="d", fun=snake.turn_right)
@@ -45,6 +57,8 @@ while game_on:
         snake.snake_increase()
         food.food_generator()
         score_board.update_score()
+        with open("highest_score.txt", mode="w") as track_score:
+            content = track_score.write(str(score_board.highest_score))
     # TODO Remove the game_on and add reset current score and add it to High score
     # TODO Rest the snake segments to start from the home position
     if wall_collision(snake.snake_head):
