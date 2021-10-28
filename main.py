@@ -6,9 +6,6 @@ from scoreboard import Scoreboard
 import time
 import os.path
 
-
-
-
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor("black")
@@ -28,15 +25,16 @@ if os.path.isfile("highest_score.txt"):
 else:
     with open("highest_score.txt", mode="w") as track_score:
         content = track_score.write(str(score_board.highest_score))
-
+score_board.score_refresh()
 screen.onkey(key="w", fun=snake.turn_up)
 screen.onkey(key="s", fun=snake.turn_down)
 screen.onkey(key="d", fun=snake.turn_right)
 screen.onkey(key="a", fun=snake.turn_left)
 
 
-def wall_collision(snake):
-    if snake.xcor() > 280 or snake.xcor() < -280 or snake.ycor() > 280 or snake.ycor() < -280:
+def wall_collision(snake_player):
+    if snake_player.xcor() > 280 or snake_player.xcor() < -280 \
+            or snake_player.ycor() > 280 or snake_player.ycor() < -280:
         return True
 
 
@@ -64,10 +62,8 @@ while game_on:
     if wall_collision(snake.snake_head):
         score_board.reset_score()
         snake.rest_snake()
-        print(len(snake.snake_segments))
     if snake_tail_collision(snake.snake_head):
         score_board.reset_score()
         snake.rest_snake()
-
 
 screen.exitonclick()
