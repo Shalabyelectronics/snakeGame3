@@ -18,12 +18,17 @@ screen.update()
 food = Food()
 score_board = Scoreboard()
 
-if os.path.isfile("../../desktop/highest_score.txt"):
-    with open("../../desktop/highest_score.txt") as track_score:
-        content = int(track_score.read())
-        score_board.highest_score = content
+if os.path.isfile("./highest_score.txt"):
+    with open("./highest_score.txt") as track_score:
+        temp = track_score.read()
+        if temp:
+            content = int(temp)
+            score_board.highest_score = content
+        else:
+            score_board.highest_score = 0
+        
 else:
-    with open("../../desktop/highest_score.txt", mode="w") as track_score:
+    with open("./highest_score.txt", mode="w") as track_score:
         content = track_score.write(str(score_board.highest_score))
 
 score_board.score_refresh()
@@ -56,7 +61,7 @@ while game_on:
         snake.snake_increase()
         food.food_generator()
         score_board.update_score()
-        with open("../../desktop/highest_score.txt", mode="w") as track_score:
+        with open("./highest_score.txt", mode="w") as track_score:
             content = track_score.write(str(score_board.highest_score))
     # TODO Remove the game_on and add reset current score and add it to High score
     # TODO Rest the snake segments to start from the home position
